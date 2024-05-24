@@ -25,10 +25,13 @@ systemctl disable brew-dir-fix.service
 systemctl disable brew-setup.service 
 systemctl disable brew-upgrade.timer
 systemctl disable brew-update.timer 
+systemctl disable waydroid-workaround.service
 ## remove packages
-rpm-ostree override remove cockpit-networkmanager cockpit-podman cockpit-selinux cockpit-system cockpit-navigator cockpit-storaged
-#rpm-ostree override remove lutris obs-vkcapture.x86_64 obs-vkcapture.i686 
-rpm-ostree override remove fluidsynth fluid-soundfont-gm qsynth wxGTK libFAudio wine-core.x86_64 wine-core.i686 wine-pulseaudio.x86_64 wine-pulseaudio.i686 winetricks protontricks
-rpm-ostree override remove tailscale fish xdotool webapp-manager wmctrl steamdeck-kde-presets-desktop cage wlr-randr
+rpm-ostree remove cockpit-networkmanager cockpit-podman cockpit-selinux cockpit-system cockpit-navigator cockpit-storaged
+rpm-ostree remove lutris waydroid obs-vkcapture.x86_64 obs-vkcapture.i686 
+rpm-ostree remove fluidsynth fluid-soundfont-gm qsynth wxGTK libFAudio wine-core.x86_64 wine-core.i686 wine-pulseaudio.x86_64 wine-pulseaudio.i686 winetricks protontricks
+rpm-ostree remove tailscale fish xdotool webapp-manager wmctrl steamdeck-kde-presets-desktop cage wlr-randr
 rm -R /home/linuxbrew/.linuxbrew
 rm /usr/share/applications/winetricks.desktop 
+rm /usr/bin/waydroid-choose-gpu
+rm /usr/share/applications/Waydroid.desktop
