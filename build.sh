@@ -14,7 +14,7 @@ RELEASE="$(rpm -E %fedora)"
 # this installs a package from fedora repos
 rpm-ostree install screen virt-manager samba fcitx5 fcitx5-hangul
 rpm-ostree install steam mangohud gamemode 
-rpm-ostree install plasma-workspace-x11
+rpm-ostree install plasma-workspace-x11 btop neovim
 
 # this would install a package from rpmfusion
 # rpm-ostree install vlc
