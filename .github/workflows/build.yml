@@ -139,7 +139,6 @@ jobs:
       # Sign container
 #      - uses: sigstore/cosign-installer@v3.5.0
 #        if: github.event_name != 'pull_request'
-#
 #      - name: Sign container image
 #        if: github.event_name != 'pull_request'
 #        run: |
