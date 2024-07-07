@@ -50,12 +50,14 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 
 COPY build.sh /tmp/build.sh
 
+RUN rpm-ostree kargs --append=nvidia.NVreg_EnableGpuFirmware=0 && \
+     ostree container commit
+
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
 
-RUN rpm-ostree kargs --append=nvidia.NVreg_EnableGpuFirmware=0 && \
-     ostree container commit
+
 
 ## NOTES:
 # - /var/lib/alternatives is required to prevent failure with some RPM installs
