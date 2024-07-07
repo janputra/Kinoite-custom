@@ -9,19 +9,11 @@ RELEASE="$(rpm -E %fedora)"
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 # this installs a package from fedora repos
-# Universal Blue specific Initramfs fixes
-source /tmp/akmods-rpms/kmods/nvidia-vars
-echo "options nvidia NVreg_EnableGpuFirmware=0" >> /usr/lib/modprobe.d/nvidia-atomic.conf
+# Universal Blue specific Initramfs fixe
 
-if [ ! -f /usr/libexec/rpm-ostree/wrapped/dracut ]; then
-    rpm-ostree cliwrap install-to-root /
-fi
+rpm-ostree install kmod-nvidia xorg-x11-drv-nvidia
+rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1 --append=nvidia.NVreg_EnableGpuFirmware=0 --append=initcall_blacklist=simpledrm_platform_driver_init
 
-QUALIFIED_KERNEL="$(rpm -qa | grep -P 'kernel-(\d+\.\d+\.\d+)' | sed -E 's/kernel-//')"
-
-/usr/libexec/rpm-ostree/wrapped/dracut --no-hostonly --kver "$QUALIFIED_KERNEL" --reproducible -v --add ostree -f "/lib/modules/$QUALIFIED_KERNEL/initramfs.img"
-
-chmod 0600 "/lib/modules/$QUALIFIED_KERNEL/initramfs.img"
 
 
 rpm-ostree install screen virt-manager samba fcitx5 fcitx5-hangul
