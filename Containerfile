@@ -33,7 +33,7 @@ ARG SOURCE_IMAGE="kinoite"
 # - stable-zfs
 # - stable-nvidia-zfs
 # - (and the above with testing rather than stable)
-ARG SOURCE_SUFFIX="-nvidia"
+ARG SOURCE_SUFFIX="-main"
 
 ## SOURCE_TAG arg must be a version built for the specific image: eg, 39, 40, gts, latest
 ARG SOURCE_TAG="latest"
@@ -59,6 +59,19 @@ RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
 
+# Install NVIDIA driver
+COPY --from=nvidia-akmods /rpms /tmp/akmods-rpms
+RUN curl -Lo /tmp/nvidia-install.sh https://raw.githubusercontent.com/ublue-os/hwe/main/nvidia-install.sh && \
+    chmod +x /tmp/nvidia-install.sh && \
+    IMAGE_NAME="${BASE_IMAGE_NAME}" /tmp/nvidia-install.sh && \
+    echo "options nvidia NVreg_EnableGpuFirmware=0" >> /usr/lib/modprobe.d/nvidia-atomic.conf && \
+    rm -f /usr/share/vulkan/icd.d/nouveau_icd.*.json && \
+    ostree container commit
+
+# Cleanup & Finalize
+RUN /usr/libexec/containerbuild/image-info && \
+    /usr/libexec/containerbuild/build-initramfs && \
+    ostree container commit
 
 
 ## NOTES:
