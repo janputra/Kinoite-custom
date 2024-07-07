@@ -12,7 +12,6 @@ RELEASE="$(rpm -E %fedora)"
 # Universal Blue specific Initramfs fixes
 source /tmp/akmods-rpms/kmods/nvidia-vars
 echo "options nvidia NVreg_EnableGpuFirmware=0" >> /usr/lib/modprobe.d/nvidia-atomic.conf
-sed -i 's@omit_drivers@force_drivers@g' /usr/lib/dracut/dracut.conf.d/99-nvidia.conf
 
 if [ ! -f /usr/libexec/rpm-ostree/wrapped/dracut ]; then
     rpm-ostree cliwrap install-to-root /
