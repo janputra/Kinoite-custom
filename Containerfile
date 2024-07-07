@@ -47,11 +47,6 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ### 3. MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
-ARG SOURCE_ORG="${SOURCE_ORG:-ublue-os}"
-ARG KERNEL_FLAVOR="${KERNEL_FLAVOR:-main}"
-ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION:-40}"
-
-COPY --from=ghcr.io/${SOURCE_ORG}/akmods-nvidia:${KERNEL_FLAVOR}-${FEDORA_MAJOR_VERSION} /rpms /tmp/akmods-rpms
 
 COPY build.sh /tmp/build.sh
 
@@ -59,9 +54,11 @@ RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
 
-RUN curl -Lo /tmp/nvidia-install.sh https://raw.githubusercontent.com/ublue-os/hwe/main/nvidia-install.sh && \
-    chmod +x /tmp/nvidia-install.sh && \
-    IMAGE_NAME="${BASE_IMAGE_NAME}" /tmp/nvidia-install.sh && \
+# Install NVIDIA driver
+
+RUN echo "options nvidia NVreg_TemporaryFilePath=/var/tmp" >> /usr/lib/modprobe.d/nvidia-atomic.conf && \ 
+    cp /etc/modprobe.d/nvidia-modeset.conf /usr/lib/modprobe.d/nvidia-modeset.conf && \
+    sed -i 's@omit_drivers@force_drivers@g' /usr/lib/dracut/dracut.conf.d/99-nvidia.conf && \
     echo "options nvidia NVreg_EnableGpuFirmware=0" >> /usr/lib/modprobe.d/nvidia-atomic.conf && \
     rm -f /usr/share/vulkan/icd.d/nouveau_icd.*.json && \
     ostree container commit
