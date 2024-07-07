@@ -47,11 +47,9 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ### 3. MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
+COPY --from=ghcr.io/${SOURCE_ORG}/akmods-nvidia:${KERNEL_FLAVOR}-${FEDORA_MAJOR_VERSION} /rpms /tmp/akmods-rpms
 
 COPY build.sh /tmp/build.sh
-
-RUN rpm-ostree kargs --append=nvidia.NVreg_EnableGpuFirmware=0 && \
-     ostree container commit
 
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
