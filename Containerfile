@@ -37,7 +37,7 @@ ARG SOURCE_SUFFIX="-main"
 
 ## SOURCE_TAG arg must be a version built for the specific image: eg, 39, 40, gts, latest
 ARG SOURCE_TAG="latest"
-
+ARG BASE_IMAGE_NAME="${BASE_IMAGE_NAME:-kinoite}"
 
 ### 2. SOURCE IMAGE
 ## this is a standard Containerfile FROM using the build ARGs above to select the right upstream image
