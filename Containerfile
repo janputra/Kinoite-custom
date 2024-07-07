@@ -1,6 +1,6 @@
 ### 2. SOURCE IMAGE
 ## this is a standard Containerfile FROM using the build ARGs above to select the right upstream image
-FROM quay.io/fedora/fedora-kinoite:40
+FROM quay.io/fedora/fedora-kinoite:latest
 
 ### 3. MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
