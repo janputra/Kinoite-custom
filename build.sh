@@ -12,7 +12,7 @@ RELEASE="$(rpm -E %fedora)"
 # Universal Blue specific Initramfs fixe
 
 rpm-ostree install kmod-nvidia xorg-x11-drv-nvidia
-rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1 --append=nvidia.NVreg_EnableGpuFirmware=0 --append=initcall_blacklist=simpledrm_platform_driver_init
+rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1 --append=nvidia-drm.fbdev=1 --append=nvidia.NVreg_EnableGpuFirmware=0 --append=initcall_blacklist=simpledrm_platform_driver_init
 
 
 
