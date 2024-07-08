@@ -11,11 +11,6 @@ RELEASE="$(rpm -E %fedora)"
 # this installs a package from fedora repos
 # Universal Blue specific Initramfs fixe
 
-rpm-ostree install kmod-nvidia xorg-x11-drv-nvidia
-rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1 --append=nvidia-drm.fbdev=1 --append=nvidia.NVreg_EnableGpuFirmware=0 --append=initcall_blacklist=simpledrm_platform_driver_init
-
-
-
 rpm-ostree install screen virt-manager samba fcitx5 fcitx5-hangul
 rpm-ostree install steam mangohud gamemode 
 rpm-ostree install plasma-workspace-x11 btop neovim
