@@ -11,12 +11,12 @@ RUN rpm-ostree install \
   ostree container commit
 
 
-RUN rpm-ostree update \
-  --uninstall rpmfusion-free-release \
-  --uninstall rpmfusion-nonfree-release \
-  --install rpmfusion-free-release \
-  --install rpmfusion-nonfree-release  && \
-  ostree container commit
+# RUN rpm-ostree update \
+#   --uninstall rpmfusion-free-release \
+#   --uninstall rpmfusion-nonfree-release \
+#   --install rpmfusion-free-release \
+#   --install rpmfusion-nonfree-release  && \
+#   ostree container commit
   
 
 COPY build.sh /tmp/build.sh
