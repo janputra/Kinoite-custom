@@ -13,7 +13,7 @@ RELEASE="$(rpm -E %fedora)"
 
 rpm-ostree install screen virt-manager samba fcitx5 fcitx5-hangul
 rpm-ostree install steam mangohud gamemode 
-rpm-ostree install plasma-workspace-x11 btop neovim
+rpm-ostree install plasma-workspace-x11 btop neovim fastfetch
 
 # this would install a package from rpmfusion
 # rpm-ostree install vlc
