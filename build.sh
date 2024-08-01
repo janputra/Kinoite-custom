@@ -14,7 +14,7 @@ RELEASE="$(rpm -E %fedora)"
 rpm-ostree install screen virt-manager samba fcitx5 fcitx5-hangul
 rpm-ostree install steam mangohud gamemode 
 rpm-ostree install plasma-workspace-x11 btop neovim fastfetch
-rpm-ostree override remove firefox
+rpm-ostree uninstall firefox
 # this would install a package from rpmfusion
 # rpm-ostree install vlc
 
