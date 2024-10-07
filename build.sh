@@ -14,6 +14,8 @@ RELEASE="$(rpm -E %fedora)"
 rpm-ostree install screen virt-manager samba fcitx5 fcitx5-hangul
 rpm-ostree install steam mangohud gamemode 
 rpm-ostree install plasma-workspace-x11 btop neovim fastfetch
+rpm-ostree override remove power-profiles-daemon
+rpm-ostree install tuned tuned-ppd tuned-utils tuned-gtk tuned-profiles-atomic tuned-profiles-cpu-partitioning 
 
 # this would install a package from rpmfusion
 # rpm-ostree install vlc
@@ -21,3 +23,4 @@ rpm-ostree install plasma-workspace-x11 btop neovim fastfetch
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+systemctl enable tuned.service
