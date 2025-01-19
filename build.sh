@@ -11,7 +11,7 @@ RELEASE="$(rpm -E %fedora)"
 # this installs a package from fedora repos
 # Universal Blue specific Initramfs fixes
 
-rpm-ostree install screen virt-manager samba fcitx5 fcitx5-hangul
+rpm-ostree install screen virt-manager samba fcitx5 fcitx5-hangul code
 rpm-ostree install steam mangohud gamemode 
 rpm-ostree install plasma-workspace-x11 btop neovim fastfetch
 rpm-ostree install tuned-utils tuned-gtk tuned-profiles-atomic tuned-profiles-cpu-partitioning 
