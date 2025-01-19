@@ -10,7 +10,7 @@ RELEASE="$(rpm -E %fedora)"
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 # this installs a package from fedora repos
 # Universal Blue specific Initramfs fixes
-
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
 rpm-ostree install screen virt-manager samba fcitx5 fcitx5-hangul code
 rpm-ostree install steam mangohud gamemode 
 rpm-ostree install plasma-workspace-x11 btop neovim fastfetch
